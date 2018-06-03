@@ -1,5 +1,5 @@
-import React from "react";
-import { Select, Option } from "./Select";
+import React from 'react';
+import { Select, Option } from './Select';
 
 const Two = () => <Option value="two">Two</Option>;
 const Four = () => <Option value="four">Four</Option>;
@@ -21,13 +21,13 @@ const DynamicOuter = ({ last }) => (
 
 class DynamicContent extends React.Component {
   state = {
-    flag: true
+    flag: true,
   };
 
   componentDidMount() {
     this.timer = setInterval(() => {
       this.setState(({ flag }) => ({
-        flag: !flag
+        flag: !flag,
       }));
     }, 2000);
   }
@@ -39,19 +39,19 @@ class DynamicContent extends React.Component {
   render() {
     const { flag } = this.state;
 
-    return <Option value="dc">Dynamic {flag ? "CONTENT" : "content"}</Option>;
+    return <Option value="dc">Dynamic {flag ? 'CONTENT' : 'content'}</Option>;
   }
 }
 
 class DynamicInner extends React.Component {
   state = {
-    flag: true
+    flag: true,
   };
 
   componentDidMount() {
     this.timer = setInterval(() => {
       this.setState(({ flag }) => ({
-        flag: !flag
+        flag: !flag,
       }));
     }, 2500);
   }
@@ -82,9 +82,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div style={{ marginBottom: "10px" }}>
+        <div style={{ marginBottom: '10px' }}>
           <button onClick={this.toggleLast}>
-            Toggle last: {this.state.last ? "ON" : "OFF"}
+            Toggle `Dynamic Outer`: {this.state.last ? 'ON' : 'OFF'}
           </button>
         </div>
         <Select initialValue="one">
