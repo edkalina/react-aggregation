@@ -18,8 +18,8 @@ yarn add react-aggregation
 
 ## Examples
 
-* **Select**: [Source](https://github.com/gokalina/react-aggregation/tree/master/examples/select) [Sandbox](https://codesandbox.io/s/8zj74v27j2)
-* **React Router Switch**: [Source](https://github.com/gokalina/react-aggregation/tree/master/examples/react-router-switch) [Sandbox](https://codesandbox.io/s/6y7lmlvlrw)
+* **Select**: [Source](https://github.com/gokalina/react-aggregation/tree/master/examples/select) | [Sandbox](https://codesandbox.io/s/8zj74v27j2)
+* **React Router Switch**: [Source](https://github.com/gokalina/react-aggregation/tree/master/examples/react-router-switch) | [Sandbox](https://codesandbox.io/s/6y7lmlvlrw)
 
 ## Code snippets
 
