@@ -1,6 +1,6 @@
 {
   "name": "react-aggregation",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "./lib/index.js",
   "module": "es/index.js",
@@ -15,8 +15,8 @@
     "test:cov": "npm test -- --coverage",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel --plugins transform-class-properties src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel --plugins transform-class-properties src --out-dir es",
-    "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/borex-c.js",
-    "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/borex-c.min.js",
+    "build:umd": "cross-env BABEL_ENV=rollup NODE_ENV=development rollup -c -o dist/react-aggregation.js",
+    "build:umd:min": "cross-env BABEL_ENV=rollup NODE_ENV=production rollup -c -o dist/react-aggregation.min.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "prepare": "npm run clean && echo npm run format:check && echo npm run lint && echo npm test && npm run build",
     "examples:lint": "eslint examples",

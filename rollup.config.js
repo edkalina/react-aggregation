@@ -8,10 +8,10 @@ const env = process.env.NODE_ENV;
 
 const config = {
   input: 'src/index.js',
-  external: ['react', 'redux'],
+  external: ['react'],
   output: {
     format: 'umd',
-    name: 'BorexC',
+    name: 'ReactAggregation',
     globals: {
       react: 'React',
     },

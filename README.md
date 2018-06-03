@@ -23,7 +23,7 @@ yarn add react-aggregation
 
 ## Code snippets
 
-Usage:
+Component usage:
 
 ```javascript
 const Two = () => <Option value="two">Two</Option>;
@@ -38,7 +38,7 @@ const SelectDemo = () => (
 );
 ```
 
-Developing:
+Component development:
 
 ```javascript
 import createAggregatable from 'react-aggregation';
