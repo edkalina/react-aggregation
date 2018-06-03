@@ -22,8 +22,10 @@
     "examples:lint": "eslint examples",
     "examples:test": "cross-env CI=true babel-node examples/testAll.js"
   },
-  "author": "",
+  "author": "Gordei Kalina <gordei@kalina.red> (https://github.com/gokalina)",
   "license": "MIT",
+  "repository": "github:gokalina/react-aggregation",
+  "bugs": "https://github.com/gokalina/react-aggregation/issues",
   "peerDependencies": {
     "react": "^16.3.0"
   },
