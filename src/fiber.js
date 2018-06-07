@@ -1,3 +1,4 @@
+import React from 'react';
 import ReactFiberReconciler from "react-reconciler";
 import AggregatableInner from './AggregatableInner';
 
@@ -49,7 +50,7 @@ const AggrRenderer = ReactFiberReconciler({
   },
 
   now: Date.now,
-
+  isPrimaryRenderer: false,
   supportsMutation: true,
 
   appendChildToContainer(root, child) {
@@ -82,6 +83,13 @@ const AggrRenderer = ReactFiberReconciler({
     instance.data = newProps.data;
     root.update();
   }
+});
+
+AggrRenderer.injectIntoDevTools({
+  findFiberByHostInstance: () => null,
+  bundleType: process.env.NODE_ENV !== 'production' ? 1 : 0,
+  version: React.version || 16,
+  rendererPackageName: 'react-aggregation'
 });
 
 export default AggrRenderer;

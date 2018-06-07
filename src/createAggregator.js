@@ -2,6 +2,11 @@ import React from 'react';
 import AggrRenderer from './fiber';
 import AggregationContext from './AggregationContext';
 
+// Wrap with identity component to have better look in devtools
+function Aggregation({ children }) {
+  return children;
+}
+
 export default function createAggregator(id) {
   return class Aggregator extends React.Component {
     state = {
@@ -30,7 +35,8 @@ export default function createAggregator(id) {
     }
 
     getAggregatableTree() {
-      return <AggregationContext.Provider value={true} children={this.props.from} />;
+      const tree = <AggregationContext.Provider value={true} children={this.props.from} />;
+      return process.env.NODE_ENV !== 'production' ? <Aggregation>{tree}</Aggregation> : tree;
     }
     render() {
       return this.props.children(this.state.items);
