@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactFiberReconciler from "react-reconciler";
-import AggregatableInner from './AggregatableInner';
+import Holder from './Holder';
 
 const emptyObject = {};
 
@@ -18,7 +18,7 @@ const AggrRenderer = ReactFiberReconciler({
   },
 
   createInstance(type, props, root) {
-    if (type !== AggregatableInner) {
+    if (type !== Holder) {
       throw new Error(`'${type}' is invalid in aggregation context`);
     }
 

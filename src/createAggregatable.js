@@ -1,12 +1,12 @@
 import React from 'react';
 
-import AggregatableInner from './AggregatableInner';
+import Holder from './Holder';
 import createAggregator from './createAggregator';
 import AggregationContext from './AggregationContext';
 
 export default function createAggregatable() {
   const id = {};
-  const Aggregatable = props => <AggregatableInner data={props} id={id} />;
+  const Aggregatable = props => <Holder data={props} id={id} />;
 
   Aggregatable.Aggregator = createAggregator(id);
 
@@ -15,7 +15,7 @@ export default function createAggregatable() {
       return (
         <AggregationContext.Consumer>
           {inAggregation =>
-            inAggregation ? <AggregatableInner data={props} id={id} /> : fallback(props)
+            inAggregation ? <Holder data={props} id={id} /> : fallback(props)
           }
         </AggregationContext.Consumer>
       );
