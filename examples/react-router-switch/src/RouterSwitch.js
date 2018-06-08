@@ -1,9 +1,15 @@
 import React from 'react';
-import { Route, matchPath } from 'react-router';
+import { Route as RouteRenderer, matchPath } from 'react-router';
 import PropTypes from 'prop-types';
 import createAggregatable from 'react-aggregation';
 
-const CaseRoute = createAggregatable();
+const Aggregatable = createAggregatable();
+const Route = Aggregatable.withFallback(props => <RouteRenderer {...props} />);
+
+if (process.env.NODE_ENV !== 'production') {
+  Route.displayName = 'Route';
+  RouteRenderer.displayName = 'RouteRenderer';
+}
 
 class Switch extends React.Component {
   static contextTypes = {
@@ -16,7 +22,7 @@ class Switch extends React.Component {
     const { children } = this.props;
 
     return (
-      <CaseRoute.Aggregator from={children}>
+      <Route.Aggregator from={children}>
         {routes => {
           const currentRoute = this.context.router.route;
           const location = this.props.location || currentRoute.location;
@@ -35,9 +41,9 @@ class Switch extends React.Component {
 
           return match ? <Route {...route} location={location} computedMatch={match} /> : null;
         }}
-      </CaseRoute.Aggregator>
+      </Route.Aggregator>
     );
   }
 }
 
-export { Switch, CaseRoute };
+export { Switch, Route };
