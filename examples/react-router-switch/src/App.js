@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter } from 'react-router-dom';
-import { Switch, Route } from './RouterSwitch';
+import { Switch, Route, Redirect } from './RouterSwitch';
 import Nav from './Nav';
 
 const AuthRoutes = () => (
@@ -30,10 +30,14 @@ class App extends React.Component {
               <Route exact path="/">
                 <h1>Main page</h1>
               </Route>
+              <Route exact path="/with-redirection">
+                <h1>With redirection</h1>
+              </Route>
               <AuthRoutes />
               <AnotherPageRoute>
                 <h1>Another Page</h1>
               </AnotherPageRoute>
+              <Redirect from="/deprecated" to="/another" />
               <Route>
                 <h1>404 Not Found</h1>
               </Route>
@@ -41,6 +45,7 @@ class App extends React.Component {
             <AnotherPageRoute>
               <p>Visible only on another page</p>
             </AnotherPageRoute>
+            <Route exact path="/with-redirection" render={() => <Redirect to="/" />} />
           </div>
         </div>
       </HashRouter>

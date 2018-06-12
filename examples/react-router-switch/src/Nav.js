@@ -12,8 +12,14 @@ export default function Nav() {
       <Link to="/another" style={LinkStyle}>
         Another page
       </Link>
+      <Link to="/with-redirection" style={LinkStyle}>
+        With redirect
+      </Link>
       <Link to="/none" style={LinkStyle}>
         Not implemented page
+      </Link>
+      <Link to="/deprecated" style={LinkStyle}>
+        Deprecated path
       </Link>
       <Link to="/auth/signin" style={LinkStyle}>
         Sign in

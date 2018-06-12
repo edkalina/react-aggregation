@@ -1,17 +1,22 @@
 import React from 'react';
-import { Route as RouteRenderer, matchPath } from 'react-router';
+import { Route as OriginalRoute, Redirect as OriginalRedirect, matchPath } from 'react-router';
 import PropTypes from 'prop-types';
-import createAggregatable from 'react-aggregation';
+import createAggregation from 'react-aggregation';
 
-const Aggregatable = createAggregatable();
-const Route = Aggregatable.withFallback(props => <RouteRenderer {...props} />);
+const { Aggregator, createAggregatable} = createAggregation();
+
+export const Route = createAggregatable.withFallback(props => <OriginalRoute {...props} />);
+export const Redirect = createAggregatable.withFallback(props => <OriginalRedirect {...props} />);
 
 if (process.env.NODE_ENV !== 'production') {
+  Aggregator.displayName = 'RouteAggregator'
   Route.displayName = 'Route';
-  RouteRenderer.displayName = 'RouteRenderer';
+  Redirect.displayName = 'Redirect';
+  OriginalRoute.displayName = 'OriginalRoute';
+  OriginalRedirect.displayName = 'OriginalRedirect';
 }
 
-class Switch extends React.Component {
+export class Switch extends React.Component {
   static contextTypes = {
     router: PropTypes.shape({
       route: PropTypes.object.isRequired,
@@ -22,15 +27,17 @@ class Switch extends React.Component {
     const { children } = this.props;
 
     return (
-      <Route.Aggregator from={children}>
+      <Aggregator from={children}>
         {routes => {
           const currentRoute = this.context.router.route;
           const location = this.props.location || currentRoute.location;
 
           let match = undefined;
-          const route = routes.find(route => {
-            const { path: pathProp, exact, strict, sensitive, from } = route;
-            const path = pathProp || from;
+          let redirect = false;
+          const route = routes.find(({ type, data }) => {
+            redirect = type === Redirect;
+            const { exact, strict, sensitive } = data;
+            const path = redirect ? data.from : data.path;
 
             match = path
               ? matchPath(location.pathname, { path, exact, strict, sensitive })
@@ -39,11 +46,17 @@ class Switch extends React.Component {
             return !!match;
           });
 
-          return match ? <Route {...route} location={location} computedMatch={match} /> : null;
+          if (!match) {
+            return null;
+          }
+
+          return redirect ? (
+            <OriginalRedirect {...route.data} />
+          ) : (
+            <OriginalRoute {...route.data} location={location} computedMatch={match} />
+          );
         }}
-      </Route.Aggregator>
+      </Aggregator>
     );
   }
 }
-
-export { Switch, Route };
