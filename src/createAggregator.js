@@ -7,7 +7,7 @@ function Aggregation({ children }) {
   return children;
 }
 
-export default function createAggregator(id) {
+export default function createAggregator(id, typed = false) {
   return class Aggregator extends React.Component {
     state = {
       items: [],
@@ -17,9 +17,9 @@ export default function createAggregator(id) {
       const root = {
         id,
         items: [],
-        update: () => {
-          this.setState({ items: root.items.map(item => item.data) });
-        },
+        update: typed
+          ? () => this.setState({ items: root.items })
+          : () => this.setState({ items: root.items.map(item => item.data) }),
       };
 
       this._node = AggrRenderer.createContainer(root);
@@ -38,6 +38,7 @@ export default function createAggregator(id) {
       const tree = <AggregationContext.Provider value={true} children={this.props.from} />;
       return process.env.NODE_ENV !== 'production' ? <Aggregation>{tree}</Aggregation> : tree;
     }
+
     render() {
       return this.props.children(this.state.items);
     }

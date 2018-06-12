@@ -26,7 +26,7 @@ const AggrRenderer = ReactFiberReconciler({
       throw new Error(`Wrong Aggregatable component used in aggregation context`);
     }
 
-    return { data: props.data };
+    return { type: props.type, data: props.data };
   },
 
   finalizeInitialChildren() {

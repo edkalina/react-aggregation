@@ -1,3 +1,6 @@
 import createAggregatable from "./createAggregatable";
+import createAggregation from "./createAggregation";
 
-export default createAggregatable;
+export { createAggregatable, createAggregation };
+
+export default createAggregation;
