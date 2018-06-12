@@ -12,6 +12,7 @@ const config = {
   output: {
     format: 'umd',
     name: 'ReactAggregation',
+    exports: 'named',
     globals: {
       react: 'React',
     },
